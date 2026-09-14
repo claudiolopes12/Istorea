@@ -3,18 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="style.css">
-    <title>Você decide o futuro da IA</title>
+
+    <title>Quiz - Segunda Guerra Mundial</title>
 </head>
+
 <body>
-    <div class="caixa-principal">
-        <h1>Você decide o futuro da IA</h1>
-        <div class="caixa-perguntas"></div>
-        <div class="caixa-alternativas"></div>
-        <div class="caixa-resultado">
-            <p class="texto-resultado"></p>
+
+    <main class="caixa-principal">
+
+        <header>
+            <p class="subtitulo">QUIZ DE HISTÓRIA</p>
+
+            <h1>Segunda Guerra Mundial</h1>
+
+            <p class="descricao">
+                Teste seus conhecimentos sobre um dos acontecimentos
+                mais importantes da história mundial.
+            </p>
+        </header>
+
+        <div class="progresso">
+            <span id="numero-pergunta">Pergunta 1 de 10</span>
+
+            <div class="barra-progresso">
+                <div id="barra-progresso"></div>
+            </div>
         </div>
-    </div>
+
+        <section class="quiz">
+
+            <div class="caixa-perguntas"></div>
+
+            <div class="caixa-alternativas"></div>
+
+            <div class="feedback"></div>
+
+        </section>
+
+        <div class="caixa-resultado">
+
+            <div class="icone-resultado">🏆</div>
+
+            <h2>Quiz finalizado!</h2>
+
+            <p class="pontuacao"></p>
+
+            <p class="mensagem-resultado"></p>
+
+            <button id="botao-reiniciar">
+                Jogar novamente
+            </button>
+
+        </div>
+
+    </main>
+
     <script src="script.js"></script>
+
 </body>
 </html>
