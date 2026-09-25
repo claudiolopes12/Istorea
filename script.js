@@ -1,26 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // SELEÇÃO DE ELEMENTOS
+
+    // Seleção de telas e containers
     const telaInicio = document.getElementById("tela-inicio");
     const telaQuiz = document.getElementById("tela-quiz");
     const caixaResultado = document.querySelector(".caixa-resultado");
 
+    // Seleção dos elementos internos
     const caixaPerguntas = document.querySelector(".caixa-perguntas");
     const caixaAlternativas = document.querySelector(".caixa-alternativas");
-
     const numeroPergunta = document.querySelector("#numero-pergunta");
     const barraProgresso = document.querySelector("#barra-progresso");
-
     const feedback = document.querySelector(".feedback");
-
     const pontuacao = document.querySelector(".pontuacao");
     const mensagemResultado = document.querySelector(".mensagem-resultado");
 
+    // Seleção dos botões de controle
     const botaoIniciar = document.getElementById("botao-iniciar");
     const botaoReiniciar = document.getElementById("botao-reiniciar");
 
-    /*
-        BANCO DE PERGUNTAS
-    */
     const perguntas = [
         {
             enunciado: "Em que ano começou a Segunda Guerra Mundial?",
@@ -118,14 +115,12 @@ document.addEventListener("DOMContentLoaded", () => {
     let pontos = 0;
     let respondeu = false;
 
-    /*
-        INICIAR / REINICIAR O QUIZ
-    */
     function iniciarQuiz() {
         atual = 0;
         pontos = 0;
         respondeu = false;
 
+        // Alterna a exibição das telas
         telaInicio.style.display = "none";
         telaQuiz.style.display = "block";
         caixaResultado.style.display = "none";
@@ -133,9 +128,6 @@ document.addEventListener("DOMContentLoaded", () => {
         mostraPergunta();
     }
 
-    /*
-        MOSTRA A PERGUNTA ATUAL
-    */
     function mostraPergunta() {
         respondeu = false;
 
@@ -158,9 +150,6 @@ document.addEventListener("DOMContentLoaded", () => {
         mostraAlternativas(perguntaAtual);
     }
 
-    /*
-        CRIA OS BOTÕES DAS ALTERNATIVAS
-    */
     function mostraAlternativas(perguntaAtual) {
         perguntaAtual.alternativas.forEach((alternativa, indice) => {
             const botao = document.createElement("button");
@@ -175,9 +164,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    /*
-        VERIFICA A RESPOSTA
-    */
     function respostaSelecionada(opcaoSelecionada, botaoSelecionado) {
         if (respondeu) return;
         respondeu = true;
@@ -209,9 +195,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1200);
     }
 
-    /*
-        MOSTRA O RESULTADO FINAL
-    */
     function mostraResultado() {
         telaQuiz.style.display = "none";
         caixaResultado.style.display = "block";
@@ -233,7 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // REGISTRO DE EVENTOS NOS BOTÕES
+    // Associa o clique dos botões com tratamento direto
     if (botaoIniciar) {
         botaoIniciar.addEventListener("click", iniciarQuiz);
     }
@@ -241,4 +224,5 @@ document.addEventListener("DOMContentLoaded", () => {
     if (botaoReiniciar) {
         botaoReiniciar.addEventListener("click", iniciarQuiz);
     }
+
 });
