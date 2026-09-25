@@ -1,8 +1,9 @@
-JavaScript
-const caixaPrincipal = document.querySelector(".caixa-principal");
+const caixaInicio = document.querySelector(".caixa-inicio");
+const conteudoQuiz = document.querySelector(".conteudo-quiz");
+const caixaResultado = document.querySelector(".caixa-resultado");
+
 const caixaPerguntas = document.querySelector(".caixa-perguntas");
 const caixaAlternativas = document.querySelector(".caixa-alternativas");
-const caixaResultado = document.querySelector(".caixa-resultado");
 
 const numeroPergunta = document.querySelector("#numero-pergunta");
 const barraProgresso = document.querySelector("#barra-progresso");
@@ -12,6 +13,7 @@ const feedback = document.querySelector(".feedback");
 const pontuacao = document.querySelector(".pontuacao");
 const mensagemResultado = document.querySelector(".mensagem-resultado");
 
+const botaoIniciar = document.querySelector("#botao-iniciar");
 const botaoReiniciar = document.querySelector("#botao-reiniciar");
 
 /*
@@ -115,15 +117,16 @@ let pontos = 0;
 let respondeu = false;
 
 /*
-    INICIALIZA E REINICIA O QUIZ
+    INICIAR / REINICIAR O QUIZ
 */
 function iniciarQuiz() {
     atual = 0;
     pontos = 0;
     respondeu = false;
 
-    document.querySelector(".quiz").style.display = "block";
-    document.querySelector(".progresso").style.display = "block";
+    // Alterna a exibição das seções
+    caixaInicio.style.display = "none";
+    conteudoQuiz.style.display = "block";
     caixaResultado.style.display = "none";
 
     mostraPergunta();
@@ -147,10 +150,8 @@ function mostraPergunta() {
     feedback.textContent = "";
     feedback.className = "feedback";
 
-    // Atualiza o número da pergunta
+    // Atualiza número e barra de progresso
     numeroPergunta.textContent = `Pergunta ${atual + 1} de ${perguntas.length}`;
-
-    // Atualiza a barra de progresso
     const progresso = ((atual + 1) / perguntas.length) * 100;
     barraProgresso.style.width = `${progresso}%`;
 
@@ -178,19 +179,12 @@ function mostraAlternativas(perguntaAtual) {
     VERIFICA A RESPOSTA
 */
 function respostaSelecionada(opcaoSelecionada, botaoSelecionado) {
-    if (respondeu) {
-        return;
-    }
-
+    if (respondeu) return;
     respondeu = true;
+
     const botoes = caixaAlternativas.querySelectorAll("button");
+    botoes.forEach(botao => (botao.disabled = true));
 
-    // Desativa todos os botões
-    botoes.forEach(botao => {
-        botao.disabled = true;
-    });
-
-    // Verifica se acertou
     if (opcaoSelecionada.correta) {
         pontos++;
         botaoSelecionado.classList.add("correta");
@@ -201,7 +195,6 @@ function respostaSelecionada(opcaoSelecionada, botaoSelecionado) {
         feedback.textContent = "✗ Resposta incorreta!";
         feedback.classList.add("erro");
 
-        // Mostra qual era a resposta correta
         const perguntaAtual = perguntas[atual];
         botoes.forEach((botao, indice) => {
             if (perguntaAtual.alternativas[indice].correta) {
@@ -210,7 +203,6 @@ function respostaSelecionada(opcaoSelecionada, botaoSelecionado) {
         });
     }
 
-    // Espera 1.2s antes de passar para a próxima pergunta
     setTimeout(() => {
         atual++;
         mostraPergunta();
@@ -221,8 +213,7 @@ function respostaSelecionada(opcaoSelecionada, botaoSelecionado) {
     MOSTRA O RESULTADO FINAL
 */
 function mostraResultado() {
-    document.querySelector(".quiz").style.display = "none";
-    document.querySelector(".progresso").style.display = "none";
+    conteudoQuiz.style.display = "none";
     caixaResultado.style.display = "block";
 
     pontuacao.textContent = `Você acertou ${pontos} de ${perguntas.length} perguntas.`;
@@ -243,9 +234,7 @@ function mostraResultado() {
 }
 
 /*
-    EVENTOS DE INICIALIZAÇÃO
+    EVENTOS DOS BOTÕES
 */
+botaoIniciar.addEventListener("click", iniciarQuiz);
 botaoReiniciar.addEventListener("click", iniciarQuiz);
-
-// Inicia o quiz ao carregar a página
-iniciarQuiz();
