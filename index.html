@@ -20,15 +20,15 @@
             </p>
         </header>
 
-        <!-- TELA INICIAL (Adicionada) -->
-        <div class="caixa-inicio">
-            <button id="botao-iniciar" class="alternativa" style="text-align: center; font-weight: bold; background-color: var(--cor-destaque); color: #111;">
+        <!-- TELA INICIAL COM BOTÃO DE INÍCIO -->
+        <div id="tela-inicio">
+            <button id="botao-iniciar" class="alternativa" style="text-align: center; font-weight: bold; background-color: var(--cor-destaque); color: #111; cursor: pointer; padding: 20px; width: 100%;">
                 Começar Quiz
             </button>
         </div>
 
-        <!-- TELA DO QUIZ (Escondida por padrão) -->
-        <div class="conteudo-quiz" style="display: none;">
+        <!-- TELA DAS PERGUNTAS DO QUIZ (ESCONDIDA DE INÍCIO) -->
+        <div id="tela-quiz" style="display: none;">
             <div class="progresso">
                 <span id="numero-pergunta">Pergunta 1 de 10</span>
                 <div class="barra-progresso">
@@ -43,7 +43,7 @@
             </section>
         </div>
 
-        <!-- TELA DE RESULTADO (Escondida por padrão) -->
+        <!-- TELA DE RESULTADO (ESCONDIDA DE INÍCIO) -->
         <div class="caixa-resultado" style="display: none;">
             <div class="icone-resultado">🏆</div>
             <h2>Quiz finalizado!</h2>
